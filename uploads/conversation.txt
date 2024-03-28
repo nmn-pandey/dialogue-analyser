@@ -1,0 +1,5 @@
+[Speaker_1]: Hello, Dave. How are you?
+
+[Speaker_2]: Hi, Joseph. I’m good. Yesterday went for a run. What about you?
+
+[Speaker_1]: I’m fine. Today I will read a book. I like reading.

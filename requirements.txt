@@ -1,0 +1,6 @@
+openai
+flask
+git+https://github.com/m-bain/whisperx.git
+deepgram-sdk
+python-dotenv
+gcloud

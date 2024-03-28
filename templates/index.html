@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dialogue Analyser</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style1.css') }}">
+    <script>
+        function setAction(action) {
+            document.getElementById('uploadForm').action = action;
+        }
+
+        // Toggles the visibility of the API type label and select element based on the value of the file type select element.
+        function toggleApiType() {
+            var fileTypeSelect = document.getElementById("file_type");
+            var apiTypeLabel = document.getElementById("api_type_label");
+            var apiTypeSelect = document.getElementById("api_type");
+
+            if (fileTypeSelect.value === "audio") {
+                apiTypeLabel.style.display = "block";
+                apiTypeSelect.style.display = "block";
+            } else {
+                apiTypeLabel.style.display = "none";
+                apiTypeSelect.style.display = "none";
+            }
+        }
+    </script>
+</head>
+<body>
+    <center>
+    <h1>Dialogue Analysis</h1>
+    <form id = "uploadForm" method="post" enctype="multipart/form-data">
+        <label for="file_type">File Type:</label>
+        <select id="file_type" name="file_type" onchange="toggleApiType()">
+            <option value="text">Text File</option>
+            <option value="audio">Audio File</option>
+        </select>
+        <label for="api_type" id="api_type_label" style="display:none;">API Type:</label>
+        <select id="api_type" name="api_type" style="display:none;">
+            <option value="deepgram">Deepgram</option>
+            <option value="whisperx">Whisper X</option>
+        </select>
+        <br>
+        <input type="file" name="file">
+        <br>
+        <input type="submit" name="action" value="Analyse Transcript">
+
+    </form>
+    </center>
+
+    {% if conversation_text %}
+    <center><h2>Conversation Text Preview</h2></center>
+    <textarea id="conversation" rows="20" cols="100" readonly>{{ conversation_text }}</textarea>
+    {% endif %}
+
+    {% if insights %}
+    <center><h2>Insights</h2></center>
+    <ul>
+        {% for insight in insights %}
+        <li>{{ insight }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+</body>
+</html>
